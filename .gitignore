@@ -1,0 +1,16 @@
+# Node.js
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+logs/
+
+# dotenv
+.env
+
+# VS Code
+.vscode/
+

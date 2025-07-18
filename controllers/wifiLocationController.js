@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { getHaloWiFiToken } = require("../utils/haloWiFiToken");
+const getHaloWiFiToken = require('../utils/haloWiFiToken');
 const Location = require("../models/Location");
 
 // POST /api/createLocation

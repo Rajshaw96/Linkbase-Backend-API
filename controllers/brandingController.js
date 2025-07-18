@@ -1,7 +1,6 @@
 const axios = require("axios");
 const FormData = require("form-data");
-const { getHaloWiFiToken } = require("../utils/haloWiFiToken"); // adjust path if needed
-
+const getHaloWiFiToken = require('../utils/haloWiFiToken');
 // Max upload file size (2MB)
 const MAX_FILE_SIZE = 2 * 1024 * 1024;
 

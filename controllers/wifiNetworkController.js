@@ -1,6 +1,5 @@
 const axios = require("axios");
-const { getHaloWiFiToken } = require("../utils/haloWiFiToken"); // adjust the path if needed
-
+const getHaloWiFiToken = require('../utils/haloWiFiToken');
 // POST /api/networking
 const createNetworking = async (req, res) => {
   const token = await getHaloWiFiToken();

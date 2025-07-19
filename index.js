@@ -38,6 +38,9 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   : [
       'http://127.0.0.1:5500',
       'http://127.0.0.1:5502',
+      'http://localhost:5500',
+      'http://localhost:5502',
+      'https://linkbase.ca',
       'https://linkbase.tech',
     ];
 
@@ -51,12 +54,13 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: "GET,PUT,POST,DELETE",
+  methods: "GET,PUT,POST,DELETE,OPTIONS",
   credentials: true,
   optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // handle preflight requests
 
 // Health check route
 app.get("/", (req, res) => {
@@ -72,6 +76,12 @@ app.use("/api", wifiLocationRoutes);
 app.use("/api", guestConnectRoutes);
 app.use("/api", networkingDevicesRoutes);
 app.use("/api/forms", formRoutes);
+
+// Global error handler for catching errors including CORS errors
+app.use((err, req, res, next) => {
+  logger.error(`Error: ${err.message}`);
+  res.status(err.status || 500).json({ error: err.message });
+});
 
 // Start the server
 const PORT = process.env.PORT || 5900;

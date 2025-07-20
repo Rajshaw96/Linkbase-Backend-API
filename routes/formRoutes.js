@@ -90,11 +90,11 @@ router.get("/responses", async (req, res) => {
 
 router.get("/responses/:formId", async (req, res) => {
   try {
-    const response = await FormResponse.findById(req.params.formId);
-    if (!response) {
-      return res.status(404).json({ error: "Form response not found" });
+    const responses = await FormResponse.find({ formId: req.params.formId }).sort({ submittedAt: -1 });
+    if (responses.length === 0) {
+      return res.status(404).json({ error: "No responses found for this formId" });
     }
-    res.json(response);
+    res.json(responses);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

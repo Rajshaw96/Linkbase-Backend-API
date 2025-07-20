@@ -88,9 +88,9 @@ router.get("/responses", async (req, res) => {
   }
 });
 
-router.get("/responses/:id", async (req, res) => {
+router.get("/responses/:formId", async (req, res) => {
   try {
-    const response = await FormResponse.findById(req.params.id);
+    const response = await FormResponse.findById(req.params.formId);
     if (!response) {
       return res.status(404).json({ error: "Form response not found" });
     }

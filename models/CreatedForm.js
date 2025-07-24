@@ -3,15 +3,15 @@ const mongoose = require("mongoose");
 const questionSchema = new mongoose.Schema({
   question: {
     type: String,
-    required: true, // Question text is mandatory
+    required: true,
   },
   type: {
     type: String,
-    required: true, // Type must be specified (e.g., "text", "multiple")
+    required: true,
   },
   options: {
     type: [String],
-    default: [], // Safe default
+    default: [],
   },
   required: {
     type: Boolean,
@@ -22,7 +22,7 @@ const questionSchema = new mongoose.Schema({
 const CreatedFormSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true, // Form title must be provided
+    required: true,
   },
   description: {
     type: String,
@@ -33,9 +33,10 @@ const CreatedFormSchema = new mongoose.Schema({
     required: true,
     validate: [(val) => val.length > 0, "At least one question is required"],
   },
-  roomId: {
-    type: String,
-    required: true, // Room assignment must be provided
+  roomIds: {
+    type: [String], // Changed from single roomId to an array
+    required: true,
+    validate: [(val) => val.length > 0, "At least one room must be assigned"],
   },
   createdAt: {
     type: Date,
